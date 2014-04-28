@@ -1,0 +1,85 @@
+<style type="text/css">
+  .log {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  .log b {
+    font-weight: bold;
+  }
+
+  .log p {
+    padding: 5px 0;
+  }
+
+  .log .header, .log .footer {
+    font-size: 20px;
+    font-weight: bold;
+    height: auto;
+    margin: 10px;
+    padding: 5px;
+  }
+
+  .log .content {
+    text-align: left;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  .log .content .query {
+    padding-bottom: 10px;
+  }
+
+  .log .content .result {
+    display: block;
+  }
+
+  .success, .log .success {
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    color: #3c763d;
+  }
+
+  .failed, .log .failed {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+  }
+</style>
+
+<div class="log">
+  <div class="header">
+    Update <%= @options[:limit] %> companies from <%= @options[:offset] %> offset
+  </div>
+  <% @accounts.each do |account| %>
+    <div class="content">
+      <div class="query">
+        Search for <b><%= account.sugar_account.name %></b>
+      </div>
+      <div class="result <%= account.search_result.present? ? "success" : "failed" %>">
+        <% if account.search_result.present? %>
+          <p>Account <b><%= account.sugar_account.name %></b> with id = <b>"<%= account.sugar_account.id %>"</b> was successfully updated with <b><%= account.search_result.company.to_sugar_data.values %></b></p>
+
+          <% if account.search_result.contacts.present? %>
+            <% account.search_result.contacts.each do |contact| %>
+              <p>Contacts <b><%= contact.to_sugar_data %></b> was successfully added to account's contacts</p>
+            <% end %>
+          <% end %>
+        <% else %>
+          <p>No data found</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="footer">
+    <% if @options[:error] %>
+      Update was finished with an error:
+      <div class="failed">
+        <%= @options[:error].message %>
+        <%= @options[:error].backtrace %>
+      </div>
+    <% else %>
+      Update successfully finished
+    <% end %>
+  </div>
+</div>
