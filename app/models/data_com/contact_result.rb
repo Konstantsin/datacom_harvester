@@ -42,6 +42,7 @@ module DataCom
       {
         first_name: first_name,
         last_name: last_name,
+        contact_description_c: url,
         primary_address_city: city,
         primary_address_state: state,
         primary_address_country: country

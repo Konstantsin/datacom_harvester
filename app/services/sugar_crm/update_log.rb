@@ -25,6 +25,21 @@ module SugarCrm
       @accounts << OpenStruct.new(sugar_account: sugar_account, search_result: search_result)
     end
 
+    class << self
+
+      def name_for(log)
+        log.gsub(LOGS_PATH, "").gsub(LOGS_FORMAT, "").gsub("/", "")
+      end
+
+      def path_for(log_name)
+        File.join(LOGS_PATH, "#{log_name}#{LOGS_FORMAT}")
+      end
+
+      def list
+        Dir[File.join(LOGS_PATH, "*#{LOGS_FORMAT}")].sort
+      end
+    end
+
     private
 
     def file

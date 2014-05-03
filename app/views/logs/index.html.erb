@@ -1,13 +1,15 @@
 <h3>List of logs</h3>
 
-<%= will_paginate %>
+<% if @logs.present? %>
+  <%= will_paginate %>
+  <ul>
+    <% @logs.each do |log| %>
+      <% log_name = SugarCrm::UpdateLog.name_for(log) %>
+      <li><%= link_to log_name, log_path(log_name) %></li>
+    <% end %>
+  </ul>
+  <%= will_paginate %>
+<% else %>
+  There are no any logs
+<% end %>
 
-<%= "There are no any logs" unless @logs.present? %>
-
-<ul>
-  <% @logs.each do |log| %>
-    <% log_name = name_for(log) %>
-    <li><%= link_to log_name, log_path(log_name) %></li>
-  <% end %>
-</ul>
-<%= will_paginate %>

@@ -1,0 +1,14 @@
+default: &default
+  login_url: https://someurl.com/login
+  search_url: https://someurl.com/home
+  username: username
+  password: password
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

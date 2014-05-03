@@ -93,3 +93,40 @@ body {
 .pagination {
   padding: 20px 0;
 }
+
+.success {
+  background-color: #dff0d8;
+  border: 1px solid #d6e9c6;
+  color: #3c763d;
+}
+
+.failed {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}
+
+.log {
+  border: 1px solid #ccc;
+  padding: 10px;
+
+  b { font-weight: bold; }
+  p { padding: 5px 0; }
+
+  .header, .footer {
+    font-size: 20px;
+    font-weight: bold;
+    height: auto;
+    margin: 10px;
+    padding: 5px;
+  }
+
+  .content {
+    text-align: left;
+    border: 1px solid #ccc;
+    padding: 10px;
+
+    .query { padding-bottom: 10px; }
+    .result { display: block; }
+  }
+}

@@ -1,55 +1,6 @@
-<style type="text/css">
-  .log {
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
-
-  .log b {
-    font-weight: bold;
-  }
-
-  .log p {
-    padding: 5px 0;
-  }
-
-  .log .header, .log .footer {
-    font-size: 20px;
-    font-weight: bold;
-    height: auto;
-    margin: 10px;
-    padding: 5px;
-  }
-
-  .log .content {
-    text-align: left;
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
-
-  .log .content .query {
-    padding-bottom: 10px;
-  }
-
-  .log .content .result {
-    display: block;
-  }
-
-  .success, .log .success {
-    background-color: #dff0d8;
-    border: 1px solid #d6e9c6;
-    color: #3c763d;
-  }
-
-  .failed, .log .failed {
-    background-color: #f2dede;
-    border-color: #ebccd1;
-    color: #a94442;
-  }
-</style>
-
 <div class="log">
   <div class="header">
-    Update <%= @options[:limit] %> companies from <%= @options[:offset] %> offset
+    Update <%= @options[:sugar_accounts] %> accounts
   </div>
   <% @accounts.each do |account| %>
     <div class="content">

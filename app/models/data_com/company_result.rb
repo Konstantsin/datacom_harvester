@@ -35,7 +35,8 @@ module DataCom
         phone_office: phone,
         shipping_address_city: city,
         shipping_address_state: state,
-        shipping_address_country: country
+        shipping_address_country: country,
+        data_com_checked_c: true
       }
     end
   end

@@ -1,3 +1,3 @@
 <h3>Log <%= params[:id] %></h3>
 
-<%= render file: current_log_file_path %>
+<%= render file: SugarCrm::UpdateLog.path_for(params[:id]) %>

@@ -1,42 +1,39 @@
 module SugarCrm
-  class UpdaterDataCom
+  module UpdaterDataCom
+    extend self
+
     ACCOUNTS_LIMIT = 10
 
-    def initialize(offset)
-      @offset = offset
-    end
-
     def update
-      accounts.each do |account|
-        if search_result = DataCom::Agent.instance.search(account.name)
-          account.update_from_data_com!(search_result.company.to_sugar_data)
-          account.add_data_com_contacts(search_result.contacts)
-        end
-        logger.log(account, search_result)
-      end
+      accounts.each do { |account| logger.log(account, search_for(account)) }
     rescue Exception => e
       logger.options[:error] = e
     ensure
       logger.close
     end
 
-    def accounts
-      Account.all(query.merge(query_options))
-    end
-
     private
 
-    def query_options
-      return {} if @offset.nil?
-      { limit: ACCOUNTS_LIMIT, offset: @offset }
+    def search_for(account)
+      search_result = DataCom::Agent.instance.search(account.name)
+      account.data_com_checked! and return nil unless search_result
+
+      account.update_from_data_com!(search_result.company.to_sugar_data)
+      account.add_data_com_contacts(search_result.contacts)
+
+      search_result
+    end
+
+    def accounts
+      Account.all(query)
     end
 
     def query
-      { conditions: { email: nil, phone_office: [nil] } }
+      { conditions: { email: nil, phone_office: [nil], data_com_checked_c: false }, limit: ACCOUNTS_LIMIT }
     end
 
     def logger
-      @logger ||= UpdateLog.new(limit: ACCOUNTS_LIMIT, offset: @offset)
+      @logger ||= UpdateLog.new(sugar_accounts: accounts.map(&:name))
     end
   end
 end

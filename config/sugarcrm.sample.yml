@@ -1,0 +1,13 @@
+default: &default
+  base_url: http://someurl.com/
+  username: username
+  password: password
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

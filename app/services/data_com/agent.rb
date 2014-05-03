@@ -1,9 +1,11 @@
 module DataCom
+  class SecurityCaptchaError < StandardError ; end
+
   class Agent < Watir::Browser
     include Singleton
 
-    def initialize
-      super(:phantomjs)
+    def initialize(driver = :phantomjs)
+      super(driver)
     end
 
     def search(query)
@@ -27,33 +29,48 @@ module DataCom
 
     def search_result
       result = SearchResult.new(html)
-      result.fetch_contacts_from(contacts_page) if result.company.contacts_found?
+      result.fetch_contacts_from(contacts_page) if result.company.contacts_found? && contacts_levels_present?
       result
     end
 
-    def contacts_page
+    def contacts_levels_present?
       div(:id, "findCompanies").table(:class, "result").tbody.trs.first.td(:class, "activeContacts").a.click and sleep 2
       div(:class, "filter-levels").td(:class, "group-name").click
-      %i(c vp).each { |level| check_checkbox(level) }
+      contacts_checkbox_for(:c).exists? || contacts_checkbox_for(:vp).exists?
+    end
+
+    def contacts_page
+      contacts_levels.keys.each do |level|
+        checkbox = contacts_checkbox_for(level)
+        checkbox.click and sleep 1 if checkbox.exists?
+      end
       html
     end
 
-    def check_checkbox(level)
-      levels = { c: /C-Level/, vp: /VP-Level/ }
-      checkbox = div(:class, "filter-levels").div(:id, "levels").div(:class, "components").span(:text, levels[level])
-      checkbox.click and sleep 1 if checkbox.present?
+    def contacts_checkbox_for(level)
+      div(:class, "filter-levels").div(:id, "levels").div(:class, "components").span(:text, contacts_levels[level])
+    end
+
+    def contacts_levels
+      { c: /C-Level/, vp: /VP-Level/ }
     end
 
     def search_for(query)
+      raise SecurityCaptchaError if security_check?
+
       if text_field(:id, "freeTextInput").present?
         text_field(:id, "freeTextInput").value = query
-        button(:id, "sbsSearch").click
+        div(:id, "sbsSearch").click
       else
         goto(config.search_url)
         text_field(:id, "homepageSBS").value = query
         div(:id, "homepageSearchIcon").click
       end
       div(:id, "tabs").ul.lis.last.double_click and sleep 2
+    end
+
+    def security_check?
+      table(:class, "hover-table").div(:class, "hover-header").div(:text, /Security Check/).exists?
     end
 
     def companies_found?

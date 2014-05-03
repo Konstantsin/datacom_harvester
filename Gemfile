@@ -15,6 +15,8 @@ gem 'phantomjs'
 gem 'nokogiri'
 gem 'sugarcrm'
 
+gem 'whenever'
+
 gem 'will_paginate'
 
 group :development do
