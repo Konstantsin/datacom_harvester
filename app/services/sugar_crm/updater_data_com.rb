@@ -5,7 +5,7 @@ module SugarCrm
     ACCOUNTS_LIMIT = 10
 
     def update
-      accounts.each do { |account| logger.log(account, search_for(account)) }
+      accounts.each { |account| logger.log(account, search_for(account)) }
     rescue Exception => e
       logger.options[:error] = e
     ensure
