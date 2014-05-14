@@ -35,7 +35,7 @@ class Account < SugarCRM::Account
     #
     def update_from_data_com!(attrs = {})
       self.website = attrs.delete(:website)
-      attrs.keep_if { |k, _| read_attribute(k).empty? }
+      attrs.keep_if { |k, _| read_attribute(k).blank? }
       update_attributes(attrs)
     end
 
