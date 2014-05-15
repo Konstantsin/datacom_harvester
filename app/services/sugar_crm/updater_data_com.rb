@@ -29,7 +29,7 @@ module SugarCrm
     end
 
     def query
-      { conditions: { email: nil, phone_office: [nil], data_com_checked_c: nil }, limit: ACCOUNTS_LIMIT }
+      { conditions: { email: nil, phone_office: [nil] }, limit: ACCOUNTS_LIMIT }
     end
 
     def logger
