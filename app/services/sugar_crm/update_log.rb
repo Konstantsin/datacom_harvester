@@ -9,6 +9,7 @@ module SugarCrm
     def initialize(options = {})
       @options = options
       @accounts = []
+      @updated_accounts_count = 0
       super(TEMPLATE)
     end
 
@@ -23,6 +24,7 @@ module SugarCrm
 
     def log(sugar_account, search_result)
       @accounts << OpenStruct.new(sugar_account: sugar_account, search_result: search_result)
+      @updated_accounts_count = @accounts.count{|a| a.search_result.present?}
     end
 
     class << self
