@@ -6,6 +6,9 @@ module SugarCrm
 
     def update
       accounts.each { |account| logger.log(account, search_for(account)) }
+    rescue DataCom::SecurityCaptchaError
+      logger.options[:error] = e
+      ErrorsMailer.captcha.deliver
     rescue Exception => e
       logger.options[:error] = e
     ensure
