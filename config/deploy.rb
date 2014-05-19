@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'datacom_harvester'
-set :repo_url, 'git@github.com:dkonovalchuk/datacom_harvester.git'
+set :repo_url, 'git@github.com:drone-loops/datacom_harvester.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
