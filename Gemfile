@@ -22,7 +22,8 @@ gem 'will_paginate'
 group :development do
   gem 'rspec-rails'
   gem 'spring'
-  gem 'capistrano-rails'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
   gem 'pry'
 end
 

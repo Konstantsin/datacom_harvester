@@ -1,6 +1,16 @@
+# Load DSL and Setup Up Stages
 require 'capistrano/setup'
-require 'capistrano/deploy'
-require 'capistrano/rails'
-require 'capistrano/bundler'
 
+# Includes default deployment tasks
+require 'capistrano/deploy'
+
+# require 'capistrano/rails/migrations'
+# require 'capistrano/rbenv'
+# require 'capistrano/chruby'
+require 'capistrano/bundler'
+require 'capistrano/rails/assets'
+require 'whenever/capistrano'
+#require 'capistrano/rvm'
+
+# Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
