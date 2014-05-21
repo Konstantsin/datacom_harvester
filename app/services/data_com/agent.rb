@@ -11,6 +11,7 @@ module DataCom
     def search(query)
       login unless logged_in?
       search_for(query)
+      sleep(30.seconds)
       search_result if companies_found?
     end
 

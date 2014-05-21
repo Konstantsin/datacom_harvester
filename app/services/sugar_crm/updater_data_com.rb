@@ -5,7 +5,10 @@ module SugarCrm
     ACCOUNTS_LIMIT = 10
 
     def update
-      accounts.each { |account| logger.log(account, search_for(account)) }
+      accounts.each do |account|
+        logger.log(account, search_for(account))
+        sleep(1.minutes)
+      end
     rescue DataCom::SecurityCaptchaError
       logger.options[:error] = e
       ErrorsMailer.captcha.deliver
