@@ -50,7 +50,14 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    columnize (0.8.9)
     commonwatir (4.0.0)
+    debugger (1.6.6)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.3.2)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.3.5)
     diff-lcs (1.2.5)
     docile (1.1.3)
     erubis (2.7.0)
@@ -84,6 +91,9 @@ GEM
       coderay (~> 1.0)
       method_source (~> 0.8)
       slop (~> 3.4)
+    pry-debugger (0.2.2)
+      debugger (~> 1.3)
+      pry (~> 0.9.10)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -195,6 +205,7 @@ DEPENDENCIES
   nokogiri
   phantomjs
   pry
+  pry-debugger
   rails (= 4.1.0.rc2)
   rspec-rails
   sass-rails (~> 4.0.3)
