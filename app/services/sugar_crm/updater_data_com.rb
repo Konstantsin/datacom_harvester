@@ -7,7 +7,7 @@ module SugarCrm
     def update
       accounts.each do |account|
         logger.log(account, search_for(account))
-        sleep(1.minutes)
+        sleep(30.seconds)
       end
     rescue DataCom::SecurityCaptchaError
       logger.options[:error] = e
@@ -22,7 +22,9 @@ module SugarCrm
 
     def search_for(account)
       search_result = DataCom::Agent.instance.search(account.name)
-      account.data_com_checked! and return nil unless search_result
+      account.data_com_checked!
+
+      return nil unless search_result
 
       account.update_from_data_com!(search_result.company.to_sugar_data)
       account.add_data_com_contacts(search_result.contacts)
