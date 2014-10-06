@@ -19,7 +19,8 @@ gem 'whenever'
 
 gem 'will_paginate'
 
-group :development do
+group :development, :test do
+  gem 'spring-commands-rspec'
   gem 'rspec-rails'
   gem 'spring'
   gem 'capistrano-rails', require: false

@@ -18,7 +18,13 @@ module DataCom
     private
 
     def logged_in?
-      div(:id, "loggedInHeader").exists?
+      div(:id, "loggedInHeader").exists? || has_active_coockies?
+    end
+
+    def has_active_coockies?
+      cookies.to_a.any? do |cookie|
+        cookie[:name] == "DWRSESSIONID" && Time.now < cookie[:expires]
+      end
     end
 
     def login

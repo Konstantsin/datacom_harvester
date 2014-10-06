@@ -1,3 +1,5 @@
+require 'data_com/agent'
+
 module SugarCrm
   module UpdaterDataCom
     extend self
@@ -9,7 +11,21 @@ module SugarCrm
         logger.log(account, search_for(account))
         sleep(30.seconds)
       end
-    rescue DataCom::SecurityCaptchaError
+    rescue DataCom::SecurityCaptchaError => e
+      logger.options[:error] = e
+      ErrorsMailer.captcha.deliver
+    rescue Exception => e
+      logger.options[:error] = e
+    ensure
+      logger.close
+    end
+
+    def update_account(account_name)
+      result = DataCom::Agent.instance.search(account_name)
+      logger.log(SugarCRM::Account.new(name: account_name), result)
+
+      result
+    rescue DataCom::SecurityCaptchaError  => e
       logger.options[:error] = e
       ErrorsMailer.captcha.deliver
     rescue Exception => e

@@ -25,6 +25,7 @@ module SugarCrm
     def log(sugar_account, search_result)
       @accounts << OpenStruct.new(sugar_account: sugar_account, search_result: search_result)
       @updated_accounts_count = @accounts.count{|a| a.search_result.present?}
+      @accounts
     end
 
     class << self
@@ -45,7 +46,11 @@ module SugarCrm
     private
 
     def file
-      @file ||= File.open(filepath, "a")
+      if !@file || @file.closed?
+        @file = File.open(filepath, "a")
+      else
+        @file
+      end
     end
 
     def filepath

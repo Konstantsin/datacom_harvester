@@ -23,6 +23,12 @@ module DataCom
       CompanyResult.new(company_info)
     end
 
+    def companies
+      @html.css("div#findCompanies table.result tbody tr")[0..2].map do |company_info|
+        CompanyResult.new(company_info) if company_info
+      end.compact
+    end
+
     # Parses specified html page, which must be a contacts search result page from data.com
     # Wrappes every found contact information as ContactResult instance and pushes it into contacts array
     #

@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, "datacom_harvester"
-set :repo_url, "git@github.com:drone-loops/datacom_harvester.git"
+set :repo_url, "git@github.com:Konstantsin/datacom_harvester.git"
 set :scm, :git
 
 set :deploy_to, "/home/ubuntu/#{fetch(:application)}"

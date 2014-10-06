@@ -19,6 +19,7 @@ describe SugarCrm::UpdateLog do
 
     it "renders result into a file and closes file stream" do
       expect(file).to receive(:puts).with(subject.result)
+      expect(file).to receive(:closed?)
       expect(file).to receive(:close)
       subject.close
     end
