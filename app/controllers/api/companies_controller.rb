@@ -10,11 +10,11 @@ module Api
         result = SugarCrm::UpdaterDataCom.update_account(request_queue.shift)
         render xml: build(result.companies.map(&:to_api_data))
       else
-        render xml: {message: 'Request limit has been exceeded!'}
+        render xml: { message: 'Request limit has been exceeded!'.freeze }
       end
     rescue => e
       logger.error e.inspect
-      render xml: {message: 'Server error!' }
+      render xml: { message: 'Server error!'.freeze }
     end
 
     private
