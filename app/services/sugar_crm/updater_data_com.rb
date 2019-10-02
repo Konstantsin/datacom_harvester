@@ -14,7 +14,7 @@ module SugarCrm
     rescue DataCom::SecurityCaptchaError => e
       logger.options[:error] = e
       ErrorsMailer.captcha.deliver
-    rescue Exception => e
+    rescue StandardError => e
       logger.options[:error] = e
     ensure
       logger.close
@@ -28,7 +28,7 @@ module SugarCrm
     rescue DataCom::SecurityCaptchaError  => e
       logger.options[:error] = e
       ErrorsMailer.captcha.deliver
-    rescue Exception => e
+    rescue StandardError => e
       logger.options[:error] = e
     ensure
       logger.close
