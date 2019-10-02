@@ -11,3 +11,7 @@
 
 /.ruby-gemset
 /.ruby-version
+
+.idea/
+/config/database.yml
+/config/secrets.yml
