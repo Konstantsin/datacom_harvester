@@ -8,7 +8,7 @@ module DataCom
     end
 
     def company_name
-      @company_info.css("td.name a.companyName").children[0].to_s
+      @company_info.css('td.name a.companyName').children[0].to_s
     end
 
     # Fetches and returns company's website address
@@ -16,7 +16,7 @@ module DataCom
     # @return [String] website of company, fetched from table row
     #
     def website
-      @company_info.css("td.name div.website a").attr("href").value
+      @company_info.css('td.name div.website a').attr('href').value
     end
 
     # Fetches and returns company's phone
@@ -24,7 +24,7 @@ module DataCom
     # @return [String] phone of company, fetched from table row
     #
     def phone
-      @company_info.css("td.name div.phone").text.strip.delete(".")
+      @company_info.css('td.name div.phone').text.strip.delete('.')
     end
 
     # Fetches and returns company's city
@@ -32,7 +32,7 @@ module DataCom
     # @return [String] city of company, fetched from table row
     #
     def city
-      @company_info.css("td.city").text.strip
+      @company_info.css('td.city').text.strip
     end
 
     # Fetches and returns company's state
@@ -40,7 +40,7 @@ module DataCom
     # @return [String] state of company, fetched from table row
     #
     def state
-      @company_info.css("td.state").text.strip
+      @company_info.css('td.state').text.strip
     end
 
     # Fetches and returns company's country
@@ -48,7 +48,7 @@ module DataCom
     # @return [String] country of company, fetched from table row
     #
     def country
-      @company_info.css("td.country").text.strip
+      @company_info.css('td.country').text.strip
     end
 
     # Returns 'true' if company's row Active Accounts value more than 0
@@ -56,7 +56,7 @@ module DataCom
     # @return [Boolean]
     #
     def contacts_found?
-      @company_info.css("td.activeContacts").text.strip.to_i > 0
+      @company_info.css('td.activeContacts').text.strip.to_i > 0
     end
 
     # Mapps current company result's data into corresponding SugarCRM account fields

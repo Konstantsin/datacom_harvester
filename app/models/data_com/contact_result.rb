@@ -7,7 +7,7 @@ module DataCom
 
     # Contacts personal url starts with current string
     #
-    URL_STARTS_WITH = "https://connect.data.com"
+    URL_STARTS_WITH = 'https://connect.data.com'
 
     def initialize(contact_row)
       @contact_row = contact_row
@@ -18,7 +18,7 @@ module DataCom
     # @return [String] name of contact, fetched from table row
     #
     def name
-      @contact_row.css("td.name").text
+      @contact_row.css('td.name').text
     end
 
     # Fetches and returns contact's personal url from td.name a table element
@@ -26,7 +26,7 @@ module DataCom
     # @return [String] url of contact, fetched from table row
     #
     def url
-      URL_STARTS_WITH + @contact_row.css("td.name a").attr("href").value
+      URL_STARTS_WITH + @contact_row.css('td.name a').attr('href').value
     end
 
     # Fetches and returns contact's title from td.title table element
@@ -34,7 +34,7 @@ module DataCom
     # @return [String] title of contact, fetched from table row
     #
     def title
-      @contact_row.css("td.title").text
+      @contact_row.css('td.title').text
     end
 
     # Fetches and returns contact's address city from td.city table element
@@ -42,7 +42,7 @@ module DataCom
     # @return [String] city of contact, fetched from table row
     #
     def city
-      @contact_row.css("td.city").text
+      @contact_row.css('td.city').text
     end
 
     # Fetches and returns contact's address state from td.state table element
@@ -50,7 +50,7 @@ module DataCom
     # @return [String] state of contact, fetched from table row
     #
     def state
-      @contact_row.css("td.state").text
+      @contact_row.css('td.state').text
     end
 
     # Fetches and returns contact's address country from td.country table element
@@ -58,7 +58,7 @@ module DataCom
     # @return [String] country of contact, fetched from table row
     #
     def country
-      @contact_row.css("td.country").text
+      @contact_row.css('td.country').text
     end
 
     # Returns contact's first name
@@ -66,7 +66,7 @@ module DataCom
     # @return [String] first_name of contact
     #
     def first_name
-      name.split(", ").first
+      name.split(', ').first
     end
 
     # Returns contact's last name
@@ -74,7 +74,7 @@ module DataCom
     # @return [String] last_name of contact
     #
     def last_name
-      name.split(", ").last
+      name.split(', ').last
     end
 
     # Mapps current contact result's data into corresponding SugarCRM contact fields

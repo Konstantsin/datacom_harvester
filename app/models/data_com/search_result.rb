@@ -24,7 +24,7 @@ module DataCom
     end
 
     def companies
-      @html.css("div#findCompanies table.result tbody tr")[0..2].map do |company_info|
+      @html.css('div#findCompanies table.result tbody tr')[0..2].map do |company_info|
         CompanyResult.new(company_info) if company_info
       end.compact
     end
@@ -43,11 +43,11 @@ module DataCom
     private
 
     def company_info
-      @html.css("div#findCompanies table.result tbody tr").first
+      @html.css('div#findCompanies table.result tbody tr').first
     end
 
     def contacts_from(page)
-      Nokogiri::HTML(page).css("div#findContacts table.result tbody tr")[0...FETCHING_CONTACTS_COUNT]
+      Nokogiri::HTML(page).css('div#findContacts table.result tbody tr')[0...FETCHING_CONTACTS_COUNT]
     end
   end
 end

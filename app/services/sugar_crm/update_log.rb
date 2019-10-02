@@ -1,8 +1,8 @@
 module SugarCrm
   class UpdateLog < ERB
-    LOGS_PATH = File.join(Rails.root, "log")
-    LOGS_FORMAT = ".html"
-    TEMPLATE = File.read(File.join(Rails.root, "app/views/logs", "sample.html.erb"))
+    LOGS_PATH = File.join(Rails.root, 'log')
+    LOGS_FORMAT =' ".html"'
+    TEMPLATE = File.read(File.join(Rails.root, 'app/views/logs', 'sample.html.erb'))
 
     attr_accessor :options
 
@@ -31,7 +31,7 @@ module SugarCrm
     class << self
 
       def name_for(log)
-        log.gsub(LOGS_PATH, "").gsub(LOGS_FORMAT, "").gsub("/", "")
+        log.gsub(LOGS_PATH, '').gsub(LOGS_FORMAT, '').gsub('/', '')
       end
 
       def path_for(log_name)
@@ -47,7 +47,7 @@ module SugarCrm
 
     def file
       if !@file || @file.closed?
-        @file = File.open(filepath, "a")
+        @file = File.open(filepath, 'a')
       else
         @file
       end
@@ -58,7 +58,7 @@ module SugarCrm
     end
 
     def filename
-      Date.today.strftime("%d-%m-%Y") + LOGS_FORMAT
+      Date.today.strftime('%d-%m-%Y') + LOGS_FORMAT
     end
   end
 end

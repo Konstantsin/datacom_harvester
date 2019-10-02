@@ -5,6 +5,5 @@ class LogsController < ApplicationController
     @logs = SugarCrm::UpdateLog.list.paginate(page: params[:page], per_page: LOGS_PER_PAGE)
   end
 
-  def show
-  end
+  def show; end
 end
