@@ -8,8 +8,8 @@ class Account < SugarCRM::Account
   # Needed to pass SugarCRM validation for contacts
   #
   DEFAULT_SUGAR_CRM_VALUES = {
-    lead_source: "databases/lists",
-    lead_source_description_c: "Data.com grabber"
+    lead_source: 'databases/lists',
+    lead_source_description_c: 'Data.com grabber'
   }
 
   # class_eval construction is used to add custom instance methods to Account
