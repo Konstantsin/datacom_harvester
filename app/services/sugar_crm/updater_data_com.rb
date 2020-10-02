@@ -25,7 +25,7 @@ module SugarCrm
       logger.log(SugarCRM::Account.new(name: account_name), result)
 
       result
-    rescue DataCom::SecurityCaptchaError  => e
+    rescue DataCom::SecurityCaptchaError => e
       logger.options[:error] = e
       ErrorsMailer.captcha.deliver
     rescue Exception => e

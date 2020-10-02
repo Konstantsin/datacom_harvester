@@ -49,7 +49,7 @@ class RequestQueue
     num = wait_seconds
 
     if items_per_minut < ITEMS_MINUTE_LIMIT
-      @added_at = Time.now if items_per_minut == 0
+      @added_at = Time.now if items_per_minut.zero?
     else
       sleep(num.seconds)
       items_per_minut = 0
