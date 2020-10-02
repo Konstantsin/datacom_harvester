@@ -7,7 +7,7 @@ set :scm, :git
 
 set :deploy_to, "/home/ubuntu/#{fetch(:application)}"
 
-set :linked_files, %w{config/datacom.yml config/sugarcrm.yml}
+set :linked_files, %w[config/datacom.yml config/sugarcrm.yml]
 
 set :keep_releases, 5
 

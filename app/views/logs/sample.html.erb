@@ -7,7 +7,7 @@
       <div class="query">
         Search for <b><%= account.sugar_account.name %></b>
       </div>
-      <div class="result <%= account.search_result.present? ? "success" : "failed" %>">
+      <div class="result <%= account.search_result.present? ? 'success' : 'failed' %>">
         <% if account.search_result.present? %>
           <p>Account <b><%= account.sugar_account.name %></b> with id = <b>"<%= account.sugar_account.id %>"</b> was successfully updated with <b><%= account.search_result.company.to_sugar_data.values %></b></p>
 
