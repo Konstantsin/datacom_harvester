@@ -18,19 +18,19 @@ module DataCom
     private
 
     def logged_in?
-      div(:id, "loggedInHeader").exists? || has_active_coockies?
+      div(:id, 'loggedInHeader').exists? || has_active_coockies?
     end
 
     def has_active_coockies?
       cookies.to_a.any? do |cookie|
-        cookie[:name] == "DWRSESSIONID" && Time.now < cookie[:expires]
+        cookie[:name] == 'DWRSESSIONID' && Time.now < cookie[:expires]
       end
     end
 
     def login
       goto(config.login_url)
-      text_field(:id, "j_username").value = config.username
-      text_field(:id, "j_password").value = config.password
+      text_field(:id, 'j_username').value = config.username
+      text_field(:id, 'j_password').value = config.password
       form(:name, "LoginForm").submit
     end
 
@@ -41,8 +41,8 @@ module DataCom
     end
 
     def contacts_levels_present?
-      div(:id, "findCompanies").table(:class, "result").tbody.trs.first.td(:class, "activeContacts").a.click and sleep 2
-      div(:class, "filter-levels").td(:class, "group-name").click
+      div(:id, 'findCompanies').table(:class, 'result').tbody.trs.first.td(:class, 'activeContacts').a.click and sleep 2
+      div(:class, 'filter-levels').td(:class, 'group-name').click
       contacts_checkbox_for(:c).exists? || contacts_checkbox_for(:vp).exists?
     end
 
@@ -55,7 +55,7 @@ module DataCom
     end
 
     def contacts_checkbox_for(level)
-      div(:class, "filter-levels").div(:id, "levels").div(:class, "components").span(:text, contacts_levels[level])
+      div(:class, 'filter-levels').div(:id, 'levels').div(:class, 'components').span(:text, contacts_levels[level])
     end
 
     def contacts_levels
@@ -65,27 +65,27 @@ module DataCom
     def search_for(query)
       raise SecurityCaptchaError if security_check?
 
-      if text_field(:id, "freeTextInput").present?
-        text_field(:id, "freeTextInput").value = query
+      if text_field(:id, 'freeTextInput').present?
+        text_field(:id, 'freeTextInput').value = query
         div(:id, "sbsSearch").click
       else
         goto(config.search_url)
-        text_field(:id, "homepageSBS").value = query
-        div(:id, "homepageSearchIcon").click
+        text_field(:id, 'homepageSBS').value = query
+        div(:id, 'homepageSearchIcon').click
       end
       div(:id, "tabs").ul.lis.last.double_click and sleep 2
     end
 
     def security_check?
-      table(:class, "hover-table").div(:class, "hover-header").div(:text, /Security Check/).exists?
+      table(:class, 'hover-table').div(:class, 'hover-header').div(:text, /Security Check/).exists?
     end
 
     def companies_found?
-      div(:id, "findCompanies").present? && div(:id, "findCompanies").span(:class, "resultCount").text.to_i > 0
+      div(:id, "findCompanies").present? && div(:id, 'findCompanies').span(:class, 'resultCount').text.to_i > 0
     end
 
     def config
-      @config ||= ConfigLoader.new("datacom.yml")
+      @config ||= ConfigLoader.new('datacom.yml')
     end
   end
 end

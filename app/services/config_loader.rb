@@ -1,6 +1,6 @@
 class ConfigLoader
 
-  def initialize(config_name, config_path = "config")
+  def initialize(config_name, config_path = 'config')
     @config = YAML::load_file(File.join(Rails.root, config_path, config_name))[Rails.env].symbolize_keys
   end
 
